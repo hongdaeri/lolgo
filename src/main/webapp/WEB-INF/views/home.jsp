@@ -9,6 +9,6 @@
 	Hello world!  
 </h1>
 
-<P>  The time on the server i</P>
+<P>  The time osn the server i</P>
 </body>
 </html>

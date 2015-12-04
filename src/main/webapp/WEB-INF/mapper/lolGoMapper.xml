@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--여기는 매핑할 Mapper 의 풀 패키지명을 적어준다-->
+<mapper namespace="com.fourdrone.lolgo.mapper.LolgoMapper">
+	<!-- BEGIN  RESULT MAP  -->
+    <resultMap type="com.fourdrone.lolgo.domain.Member" id="MemberResult">
+        <result property="memberId" column="MEMBER_ID" />
+        <result property="password" column="PASSWORD" />
+        <result property="name" column="NAME" />
+        <result property="regDate" column="REG_DATE" />
+    </resultMap>
+
+     <resultMap type="com.fourdrone.lolgo.domain.Crew" id="CrewResult">
+        <result property="crewId" column="CREW_ID" />
+        <result property="crewName" column="CREW_NAME" />
+        <result property="crewregDate" column="CREW_REG_DATE" />
+    </resultMap>
+ 
+    <resultMap type="com.fourdrone.lolgo.domain.Attach" id="AttachResult">
+        <result property="crewId" column="CREW_ID" />
+        <result property="memberId" column="MEMBER_ID" />
+        <result property="role" column="ROLE" />
+    </resultMap>
+
+    <resultMap type="com.fourdrone.lolgo.domain.Estimation" id="EstimationResult">
+        <result property="crewId" column="CREW_ID" />
+        <result property="estimator" column="ESTIMATOR" />
+        <result property="estimatorTarget" column="ESTIMATOR_TARGET" />
+        <result property="estimationDate" column="ESTIMATION_DATE" />
+        <result property="top" column="TOP" />
+        <result property="mid" column="MID" />
+        <result property="jungle" column="JUNGLE" />
+        <result property="onedeal" column="ONEDEAL" />
+        <result property="support" column="SUPPORT" />
+        <result property="mental" column="MENTAL" />
+        <result property="carry" column="CARRY" />
+    </resultMap>
+
+     <resultMap type="com.fourdrone.lolgo.domain.WarHistory" id="WarHistoryResult">
+        <result property="crewId" column="CREW_ID" />
+        <result property="winner" column="WINNER" />
+        <result property="warDate" column="WAR_DATE" />
+        <result property="blueTop" column="BLUE_TOP" />
+		<result property="blueTopChamp" column="BLUE_TOP_CHAMP" />
+		<result property="blueMid" column="BLUE_MID" />
+		<result property="blueMidChamp" column="BLUE_MID_CHAMP" />
+		<result property="blueJungle" column="BLUE_JUNGLE" />
+		<result property="blueJungleChamp" column="BLUE_JUNGLE_CHAMP" />
+		<result property="blueOnedeal" column="BLUE_ONEDEAL" />
+		<result property="blueOnedealChamp" column="BLUE_ONEDEAL_CHAMP" />
+		<result property="blueSupport" column="BLUE_SUPPORT" />
+		<result property="blueSupportChamp" column="BLUE_SUPPORT_CHAMP" />
+		<result property="redTop" column="RED_TOP" />
+		<result property="redTopChamp" column="RED_TOP_CHAMP" />
+		<result property="redMid" column="RED_MID" />
+		<result property="redMidChamp" column="RED_MID_CHAMP" />
+		<result property="redJungle" column="RED_JUNGLE" />
+		<result property="redJungleChamp" column="RED_JUNGLE_CHAMP" />
+		<result property="redOnedeal" column="RED_ONEDEAL" />
+		<result property="redOnedealChamp" column="RED_ONEDEAL_CHAMP" />
+		<result property="redSupport" column="RED_SUPPORT" />
+		<result property="redSupportChamp" column="RED_SUPPORT_CHAMP" />
+    </resultMap>
+
+	<!-- END  RESULT MAP  -->
+	
+	
+	
+	
+	<!-- BEGIN  SELECT -->
+    <select id="getMemberList" resultMap="MemberResult">
+        SELECT  * FROM  TB_MEMBER
+    </select>
+
+    <select id="getMember" parameterType="String" resultMap="MemberResult">
+        SELECT  * FROM  TB_MEMBER  WHERE member_Id = #{memberId}
+    </select>
+
+
+	<!-- END  SELECT -->
+	
+	
+	<!-- BEGIN  INSERT -->
+    <insert id="addMember" parameterType="String"> <!-- useGeneratedKeys="true" keyProperty="id"> -->
+        INSERT INTO TB_MEMBER (member_id, member_name, member_password, member_reg_date , member_photo)
+        VALUES (#{memberId}, #{memberName}, #{memberPassword}, #{regDate}, #{memberPhoto})
+    </insert>
+
+	<!-- END  INSERT -->
+	
+	<!-- BEGIN  UPDATE -->
+    <update id="modMember" parameterType="String">
+        UPDATE TB_MEMBER
+        SET member_password = #{memberPassword} , member_name=#{memberName}
+        WHERE member_id = #{memberId}
+    </update>
+    
+    <update id="modPhoto" parameterType="String">
+        UPDATE TB_MEMBER
+        SET member_photo = #{memberPhoto}
+        WHERE member_id = #{memberId}
+    </update>
+
+    <update id="modMemberSignOut" parameterType="String">
+        UPDATE TB_MEMBER
+        SET MEMBER_SIGNOUT_REQUEST = #{memberSignOutRequest} , MEMBER_SIGNOUT_REQUEST_DATE=#{memberSignOutRequestDate}
+        WHERE member_id = #{memberId}
+    </update>
+
+	<!-- END  UPDATE -->
+	
+	
+	<!-- BEGIN  DELETE -->
+    <delete id="delMember" parameterType="String">
+        DELETE FROM TB_MEMBER WHERE member_id = #{memberId}
+    </delete>
+
+	<!-- END  DELETE -->
+   
+
+</mapper>

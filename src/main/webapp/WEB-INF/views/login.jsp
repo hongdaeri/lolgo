@@ -10,7 +10,7 @@
 	롤Go :: 로그인
 </h1>
 
-<form action="/account/login" method="post">
+<form action="/login" method="post">
 	아이디 (롤닉네임)<br><input type="text" name="memberId"><br><br>
 	비밀번호<br><input type="password" name="password"><br><br>
 	<input type="submit" value="로그인">
